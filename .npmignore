@@ -1,0 +1,17 @@
+bin
+node_modules
+npm-debug.log
+npm-error.log
+yarn-debug.log
+yarn-error.log
+yarn.lock
+package-lock.json
+.editorconfig
+.env
+test/tmp
+test/database
+coverage
+.coveralls.yml
+.travis.yml
+.nyc_output
+appveyor.yml

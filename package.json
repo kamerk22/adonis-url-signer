@@ -1,0 +1,53 @@
+{
+  "name": "adonis-url-signer",
+  "version": "1.0.0",
+  "description": "URL signing provider for Adonis.js",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard",
+    "lint:fix": "standard --fix",
+    "lint-staged": "lint-staged"
+  },
+  "devDependencies": {
+    "@adonisjs/fold": "^4.0.9",
+    "@adonisjs/framework": "^5.0.13",
+    "husky": "^1.3.1",
+    "japa": "^2.0.7",
+    "japa-cli": "^1.0.1",
+    "standard": "^12.0.1"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint:fix",
+      "git add"
+    ]
+  },
+  "keywords": [
+    "adonisjs",
+    "adonis",
+    "adonis-framework",
+    "url-sign",
+    "node"
+  ],
+  "standard": {
+    "globals": [
+      "use",
+      "make"
+    ]
+  },
+  "author": "Kashyap Merai <kashyapk62@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kamerk22/adonis-url-signer"
+  },
+  "bugs": {
+    "url": "https://github.com/kamerk22/adonis-url-signer/issues"
+  },
+  "homepage": "https://github.com/kamerk22/adonis-url-signer#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"
+    }
+  }
+}
