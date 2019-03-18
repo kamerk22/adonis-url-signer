@@ -8,18 +8,15 @@
  *
  */
 
-const { ServiceProvider } = require('@adonisjs/fold')
+const { ServiceProvider } = require.main.require('@adonisjs/fold')
 
 class UrlSignerProvider extends ServiceProvider {
   register () {
-    this.app.singleton('Adonis/Addons/Sophos', app => {
-      const Config = app.use('Adonis/Src/Config')
-      const UrlSigner = require('../src/UrlSigner')
-
+    this.app.singleton('Adonis/Addons/UrlSinger', () => {
+      const Config = this.app.use('Adonis/Src/Config')
+      const UrlSigner = require('../src/UrlSinger')
       return new UrlSigner(Config)
     })
-
-    this.app.alias('Adonis/Addons/UrlSigner', 'UrlSigner')
   }
 }
 
