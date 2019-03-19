@@ -18,7 +18,7 @@ module.exports = {
 
   /*
   |--------------------------------------------------------------------------
-  | Default Expiry Time in Days
+  | Default Expiry Time in Hours
   |--------------------------------------------------------------------------
   |
   | The default expiration time of a URL in hours.
