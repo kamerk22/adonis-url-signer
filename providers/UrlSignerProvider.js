@@ -10,7 +10,7 @@
  *
  */
 
-const { ServiceProvider } = require.main.require('@adonisjs/fold')
+const { ServiceProvider } = require('@adonisjs/fold')
 
 class UrlSignerProvider extends ServiceProvider {
   /**

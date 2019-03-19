@@ -29,7 +29,9 @@ class Signed {
         request.originalUrl()
     )
     if (!isAllowed) {
-      throw new Error(403)
+      var error = new Error('Forbridden: Access Denied.')
+      error.status = 403
+      throw error
     }
     await next()
   }

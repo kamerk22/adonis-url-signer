@@ -26,11 +26,7 @@ const Url = require('url')
  */
 class UrlSigner {
   constructor (Config) {
-    this.config = Config.merge('urlSigner', {
-      signatureKey: this.signatureKey,
-      defaultExpirationTimeInHour: this.defaultExpirationTimeInHour,
-      options: this.options
-    })
+    this.config = Config.merge('urlSigner')
   }
 
   /**
@@ -49,7 +45,12 @@ class UrlSigner {
     let u = Url.parse(url, true)
     if (expiration) {
       if (isNaN(expiration)) {
-        throw new Error('Expiration time must be numeric.')
+        var error = new Error(
+          'Invalid Argument: Expiration time must be numeric.'
+        )
+
+        error.status = 422
+        throw error
       }
       parameter[this.config.options.expires] =
         Math.round(Date.now() / 1000) + expiration * 60 * 60
@@ -113,6 +114,7 @@ class UrlSigner {
    * The _makeSign method generate signature for
    * given payload using given serect key.
    *
+   * @private
    * @method _makeSign
    * @param {Object} payload - The payload to include in sign
    * @param {String} serect - Key to use for generating HMAC
@@ -131,6 +133,8 @@ class UrlSigner {
    * The _sortObject method sort all query params
    * and join them.
    *
+   *
+   * @private
    * @method _sortObject
    * @param {Object} query - URL query string to sort
    *
