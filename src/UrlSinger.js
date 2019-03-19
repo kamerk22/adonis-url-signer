@@ -15,47 +15,82 @@ const Query = require('querystring')
 const Url = require('url')
 
 /**
- * The UrlSigner class sign a request and generate a URL
+ * The UrlSigner class can generate sign, temporary sign
+ * URL. Can check for valid sign.
  *
- * @class UrlSigner
- *
+ * @class
  * @param {Object} Config
+ *
  */
 class UrlSigner {
   constructor (Config) {
     this.config = Config.merge('urlSigner', {
       signatureKey: this.signatureKey,
-      defaultExpirationTimeInDays: this.defaultExpirationTimeInDays,
+      defaultExpirationTimeInHour: this.defaultExpirationTimeInHour,
       options: this.options
     })
   }
 
-  signRoute (url, parameter = {}, expiration = null) {
+  /**
+   * The sign function generate sign URL.
+   *
+   * @function sign
+   * @param {string} url - URL to sign
+   * @param {Object} parameter - Any additional parameter to include
+   * @param {Number} expiration - Expiration in hours
+   *
+   * @return {String}
+   *
+   */
+  sign (url, parameter = {}, expiration = null) {
     let u = Url.parse(url, true)
     if (expiration) {
+      if (isNaN(expiration)) {
+        throw new Error('Expiration time must be numeric.')
+      }
       parameter[this.config.options.expires] =
-        Math.round(Date.now() / 1000) + expiration * 24 * 60 * 60
+        Math.round(Date.now() / 1000) + expiration * 60 * 60
     }
     u.search = sortObject({
       ...u.query,
-      ...parameter,
-      [`${this.config.options.signature}`]: sign(
-        u.format(),
-        this.config.signatureKey
-      )
+      ...parameter
     })
+    u.search += `&${[`${this.config.options.signature}`]}=${makeSign(
+      u.format(),
+      this.config.signatureKey
+    )}`
     return u.format()
   }
 
-  temporarySignedRoute (
+  /**
+   * The temporarySign function generate temporary sign URL.
+   *
+   * @function temporarySign
+   * @param {string} url - URL to sign
+   * @param {Object} parameter - Any additional parameter to include
+   * @param {Number} expiration - Expiration in hours
+   *
+   * @return {String}
+   *
+   */
+  temporarySign (
     url,
     parameter = {},
-    expiration = this.config.defaultExpirationTimeInDays
+    expiration = this.config.defaultExpirationTimeInHour
   ) {
-    return this.signRoute(url, parameter, expiration)
+    return this.sign(url, parameter, expiration)
   }
 
-  hasValidSignature (url) {
+  /**
+   * The isValidSign function check the signature of given URL
+   *
+   * @function temporarySign
+   * @param {string} url - URL to sign
+   *
+   * @return {Boolean}
+   *
+   */
+  isValidSign (url) {
     let u = Url.parse(url, true)
 
     let query = u.query
@@ -66,18 +101,40 @@ class UrlSigner {
     delete query[this.config.options.signature]
     u.search = Query.stringify(u.query)
     return (
-      signature === sign(u.format(), this.config.signatureKey) &&
+      signature === makeSign(u.format(), this.config.signatureKey) &&
       !(expires && Math.round(Date.now() / 1000) > expires)
     )
   }
 }
 
-function sign (dataToSign, serect) {
+/**
+ * The makeSign function generate signature for
+ * given payload using given serect key.
+ *
+ * @function makeSign
+ * @param {Object} payload - The payload to include in sign
+ * @param {String} serect - Key to use for generating HMAC
+ *
+ * @returns {String}
+ *
+ */
+function makeSign (payload, serect) {
   return crypto
     .createHmac('sha256', serect)
-    .update(dataToSign)
-    .digest('base64')
+    .update(payload)
+    .digest('hex')
 }
+
+/**
+ * The sortObject function sort all query params
+ * and join them.
+ *
+ * @function sortObject
+ * @param {Object} query - URL query string to sort
+ *
+ * @returns {String}
+ *
+ */
 function sortObject (query) {
   return Object.keys(query)
     .sort()
