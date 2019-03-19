@@ -8,7 +8,7 @@
  *
  */
 
-const UrlSigner = use('Adonis/Addons/UrlSinger')
+const UrlSigner = use('Adonis/UrlSigner')
 
 class Signed {
   async handle ({ request }, next) {

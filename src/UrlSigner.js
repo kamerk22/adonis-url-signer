@@ -38,6 +38,7 @@ class UrlSigner {
    * @param {string} url - URL to sign
    * @param {Object} parameter - Any additional parameter to include
    * @param {Number} expiration - Expiration in hours
+   * @throws {Error}
    *
    * @return {String}
    *
