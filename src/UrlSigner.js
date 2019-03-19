@@ -4,7 +4,9 @@
  *
  * adonis-url-signer
  * Copyright(c) Kashyap Merai <kashyapk62@gmail.com>
- * MIT Licensed
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source co
  *
  */
 
@@ -19,7 +21,7 @@ const Url = require('url')
  * URL. Can check for valid sign.
  *
  * @class
- * @param {Object} Config
+ * @constructor
  *
  */
 class UrlSigner {
@@ -32,9 +34,9 @@ class UrlSigner {
   }
 
   /**
-   * The sign function generate sign URL.
+   * The sign method generate sign URL.
    *
-   * @function sign
+   * @method sign
    * @param {string} url - URL to sign
    * @param {Object} parameter - Any additional parameter to include
    * @param {Number} expiration - Expiration in hours
@@ -52,11 +54,11 @@ class UrlSigner {
       parameter[this.config.options.expires] =
         Math.round(Date.now() / 1000) + expiration * 60 * 60
     }
-    u.search = sortObject({
+    u.search = this._sortObject({
       ...u.query,
       ...parameter
     })
-    u.search += `&${[`${this.config.options.signature}`]}=${makeSign(
+    u.search += `&${[`${this.config.options.signature}`]}=${this._makeSign(
       u.format(),
       this.config.signatureKey
     )}`
@@ -64,9 +66,9 @@ class UrlSigner {
   }
 
   /**
-   * The temporarySign function generate temporary sign URL.
+   * The temporarySign method generate temporary sign URL.
    *
-   * @function temporarySign
+   * @method temporarySign
    * @param {string} url - URL to sign
    * @param {Object} parameter - Any additional parameter to include
    * @param {Number} expiration - Expiration in hours
@@ -83,9 +85,9 @@ class UrlSigner {
   }
 
   /**
-   * The isValidSign function check the signature of given URL
+   * The isValidSign method check the signature of given URL
    *
-   * @function temporarySign
+   * @method temporarySign
    * @param {string} url - URL to sign
    *
    * @return {Boolean}
@@ -102,45 +104,45 @@ class UrlSigner {
     delete query[this.config.options.signature]
     u.search = Query.stringify(u.query)
     return (
-      signature === makeSign(u.format(), this.config.signatureKey) &&
+      signature === this._makeSign(u.format(), this.config.signatureKey) &&
       !(expires && Math.round(Date.now() / 1000) > expires)
     )
   }
-}
 
-/**
- * The makeSign function generate signature for
- * given payload using given serect key.
- *
- * @function makeSign
- * @param {Object} payload - The payload to include in sign
- * @param {String} serect - Key to use for generating HMAC
- *
- * @returns {String}
- *
- */
-function makeSign (payload, serect) {
-  return crypto
-    .createHmac('sha256', serect)
-    .update(payload)
-    .digest('hex')
-}
+  /**
+   * The _makeSign method generate signature for
+   * given payload using given serect key.
+   *
+   * @method _makeSign
+   * @param {Object} payload - The payload to include in sign
+   * @param {String} serect - Key to use for generating HMAC
+   *
+   * @returns {String}
+   *
+   */
+  _makeSign (payload, serect) {
+    return crypto
+      .createHmac('sha256', serect)
+      .update(payload)
+      .digest('hex')
+  }
 
-/**
- * The sortObject function sort all query params
- * and join them.
- *
- * @function sortObject
- * @param {Object} query - URL query string to sort
- *
- * @returns {String}
- *
- */
-function sortObject (query) {
-  return Object.keys(query)
-    .sort()
-    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(query[k]))
-    .join('&')
+  /**
+   * The _sortObject method sort all query params
+   * and join them.
+   *
+   * @method _sortObject
+   * @param {Object} query - URL query string to sort
+   *
+   * @returns {String}
+   *
+   */
+  _sortObject (query) {
+    return Object.keys(query)
+      .sort()
+      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(query[k]))
+      .join('&')
+  }
 }
 
 module.exports = UrlSigner
