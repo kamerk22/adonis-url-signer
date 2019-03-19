@@ -48,7 +48,6 @@ class UrlSigner {
         var error = new Error(
           'Invalid Argument: Expiration time must be numeric.'
         )
-
         error.status = 422
         throw error
       }
