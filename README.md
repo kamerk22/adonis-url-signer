@@ -2,7 +2,7 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 <br/>
 
-This library allows you to easily create "signed" URLs. These URLs have a "signature" hash appended as query string so we can verify easily verify that it's not manipulated.
+This library allows you to easily create "signed" URLs. These URLs have a "signature" hash appended as query string so we can easily verify that it's not manipulated.
 
 For example, you might use signed URLs to implement "password reset link" which is valid for couple of hours only.
 

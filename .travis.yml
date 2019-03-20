@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - node
+  - 8.0.0
+sudo: false
+install:
+  - npm install
+after_script:
+  - npm run coverage
+deploy:
+  provider: npm
+  email: kashyapk62@gmail.com
+  api_key:
+    secure: BmYB65Cki1ijWF0FGz8c2YsHl1bXC5/9Scs4JkVbKft+bqetzq0fhCEE67CiPtkrDxi1A1fjsRzNl8wCYhMf7+chsw0Rfn+QkkyLNBsnPdjTdhaS3Ns+M1ZlP1kzHUNHO4IEPT7Y2gyGi1oGhekj4+lwGoNEjDzHQ4tqC4LxG6b0QA2a9NK+Mg5HtiwgJm4nizjIqggECtQWk4EJjypf13vzIv095znP8Xyb5nCD0MqROm092MbY59GiuusrNUldTQxUdGwbElxdaGhUVIsc8aKZH5qXQ26GAAcbhOhtfou7qr21+XNCGCBWHm6uQLk0qtGv8LchyPIeZODvJIn1H4hUQiZCKUbbC4N03hmRXI++hmnJPgoo54f/72x3DG3jhdGVWHZgaRQSXIiXr0f9g6IPKF81V83DwfTKJZ6nyXlPQpb21jiYlK3jSPoSX72Q7VFBEa5o1mRtNtlvjxHBsYKlWzgmzVI9bOGisdhrTGbeyp6+8G7HgcvK0r0twYWvgQ7mPic3CyBbRA/whCIIuRUrIQ36FPJzIUMngCjskfz+CtinESq+7b+Pevti78n/aYhFGvml8H+9XNBly3/V/cNh8S/X7cxMNWk33DHzOF8ykwcRHHpD4nYcJKz4w+T6cSPjdpGvtCxy18TN6SPZKW4f5tqV4SeaQFCfAnk9lL8=
+  on:
+    tags: true
+    repo: kamerk22/adonis-url-signer
