@@ -12,8 +12,8 @@ npm install --save adonis-url-signer
 Register the urlSigner provider in start/app.js:
 ```js
 const providers = [
-  ...
-  'adonis-url-signer/providers/UrlSignerProvider'
+    ...
+    'adonis-url-signer/providers/UrlSignerProvider'
 ]
 ```
 Register aliases of provider in start/app.js:
@@ -26,8 +26,8 @@ const aliases = {
 Register named middleware in start/kernel.js:
 ```js
 const namedMiddleware = {
-  ...
-  signed: 'Adonis/UrlSigner/Signed'
+    ...
+    signed: 'Adonis/UrlSigner/Signed'
 }
 ```
 
