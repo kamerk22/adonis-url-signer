@@ -70,16 +70,16 @@ class UrlSigner {
    *
    * @method temporarySign
    * @param {string} url - URL to sign
-   * @param {Object} parameter - Any additional parameter to include
    * @param {Number} expiration - Expiration in hours
+   * @param {Object} parameter - Any additional parameter to include
    *
    * @return {String}
    *
    */
   temporarySign (
     url,
-    parameter = {},
-    expiration = this.config.defaultExpirationTimeInHour
+    expiration = this.config.defaultExpirationTimeInHour,
+    parameter = {}
   ) {
     return this.sign(url, parameter, expiration)
   }
