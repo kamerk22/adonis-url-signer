@@ -34,7 +34,7 @@ test.group('UrlSigner', group => {
     assert.notEqual(u.query[urlSignerConfig.options.expires], undefined)
   })
 
-  test('should return return custom query params', assert => {
+  test('should return custom query params', assert => {
     const urlSigner = use('UrlSigner')
     let customParams = {
       foo: 'bar',
@@ -61,6 +61,14 @@ test.group('UrlSigner', group => {
     const urlSigner = use('UrlSigner')
     let u = Url.parse(urlSigner.temporarySign(URL, {}, -1), true)
     assert.isFalse(urlSigner.isValidSign(u.format()))
+  })
+
+  test('should return valid expiry time', assert => {
+    const urlSigner = use('UrlSigner')
+    let u = Url.parse(urlSigner.temporarySign(URL, {}, 1), true)
+    let now = Math.round(Date.now() / 1000)
+    assert.isTrue(u.query[urlSignerConfig.options.expires] >= now)
+    assert.isTrue(u.query[urlSignerConfig.options.expires] <= now + 60 * 60)
   })
 
   test('should throw exception if expiration is invalid', assert => {

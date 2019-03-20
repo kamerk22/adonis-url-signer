@@ -6,15 +6,18 @@
   "scripts": {
     "lint": "standard",
     "lint:fix": "standard --fix",
-    "lint-staged": "lint-staged",
+    "lint-staged": "npm run test:win && lint-staged",
+    "test:local": "NO_ANSI=false FORCE_COLOR=true nyc node ./bin/index.js --local",
     "test:win": "set NO_ANSI=false && set FORCE_COLOR=true && nyc node ./bin/index.js --win",
-    "coverage": "nyc report --reporter=text-lcov"
+    "test": "npm run test:local",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
     "@adonisjs/fold": "^4.0.9",
     "@adonisjs/framework": "^5.0.13",
     "@adonisjs/sink": "^1.0.17",
     "child_process": "^1.0.2",
+    "coveralls": "^3.0.3",
     "husky": "^1.3.1",
     "japa": "^1.0.5",
     "japa-cli": "^1.0.1",
