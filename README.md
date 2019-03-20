@@ -32,7 +32,7 @@ const namedMiddleware = {
 
 ## Tests
 Tests are written using [japa](http://github.com/thetutlage/japa). Run the following commands to run tests.
-```js
+```bash
 npm run test:local
 
 # report coverage
