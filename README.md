@@ -1,5 +1,6 @@
 # Create secured URLs with a limited lifetime in AdonisJs
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+<br/>
 This library can create URLs with a limited lifetime in AdonisJs. This is acheive by adding an expiration date and a signature to the URL.
 
 ## Install
