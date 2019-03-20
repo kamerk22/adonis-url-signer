@@ -1,8 +1,20 @@
+'use strict'
+
+/**
+ *
+ * adonis-url-signer
+ * Copyright(c) Kashyap Merai <kashyapk62@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source co
+ *
+ */
+
 const test = require('japa')
 const { ioc } = require('@adonisjs/fold')
 const { setupResolver, Config } = require('@adonisjs/sink')
 const Url = require('url')
-const urlSignerConfig = require('./config')
+const urlSignerConfig = require('../config')
 const URL = 'http://localhost:3333'
 
 test.group('UrlSigner', group => {
@@ -67,7 +79,7 @@ test.group('UrlSigner', group => {
     const urlSigner = use('UrlSigner')
     let u = Url.parse(urlSigner.temporarySign(URL, {}, 1), true)
     let now = Math.round(Date.now() / 1000)
-    assert.isTrue(u.query[urlSignerConfig.options.expires] >= now)
+    assert.isTrue(u.query[urlSignerConfig.options.expires] > now)
     assert.isTrue(u.query[urlSignerConfig.options.expires] <= now + 60 * 60)
   })
 
