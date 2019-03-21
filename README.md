@@ -10,7 +10,7 @@ For example, you might use signed URLs to implement "password reset link" which 
 
 ## Install
 ```js
-npm install --save adonis-url-signer
+adonis install adonis-url-signer
 ```
 
 ## Setup
