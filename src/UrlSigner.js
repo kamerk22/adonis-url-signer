@@ -132,7 +132,6 @@ class UrlSigner {
    * The _sortObject method sort all query params
    * and join them.
    *
-   *
    * @private
    * @method _sortObject
    * @param {Object} query - URL query string to sort

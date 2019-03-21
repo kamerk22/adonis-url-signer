@@ -78,7 +78,6 @@ test.group('UrlSigner', group => {
   test('should return valid expiry time', assert => {
     const urlSigner = use('UrlSigner')
     let u = Url.parse(urlSigner.temporarySign(URL, 1), true)
-    console.log(u.format())
     let now = Math.round(Date.now() / 1000)
     assert.isTrue(u.query[urlSignerConfig.options.expires] > now)
     assert.isTrue(u.query[urlSignerConfig.options.expires] <= now + 60 * 60)

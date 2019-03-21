@@ -3,6 +3,9 @@ node_js:
   - node
   - 8.0.0
 sudo: false
+cache:
+  directories:
+  - node_modules
 install:
   - npm install
 after_script:
