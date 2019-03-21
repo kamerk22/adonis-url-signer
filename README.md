@@ -1,6 +1,7 @@
 # Create secured URLs with a limited lifetime in AdonisJs
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Build Status](https://www.travis-ci.org/kamerk22/adonis-url-signer.svg?branch=master)](https://www.travis-ci.org/kamerk22/adonis-url-signer)
+[![Coverage Status](https://coveralls.io/repos/github/kamerk22/adonis-url-signer/badge.svg?branch=master)](https://coveralls.io/github/kamerk22/adonis-url-signer?branch=master)
 <br/>
 
 This library allows you to easily create "signed" URLs. These URLs have a "signature" hash appended as query string so we can easily verify that it's not manipulated.

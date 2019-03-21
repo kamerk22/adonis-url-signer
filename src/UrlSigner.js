@@ -54,10 +54,7 @@ class UrlSigner {
       parameter[this.config.options.expires] =
         Math.round(Date.now() / 1000) + expiration * 60 * 60
     }
-    u.search = this._sortObject({
-      ...u.query,
-      ...parameter
-    })
+    u.search = this._sortObject(Object.assign({}, u.query, parameter))
     u.search += `&${[`${this.config.options.signature}`]}=${this._makeSign(
       u.format(),
       this.config.signatureKey
