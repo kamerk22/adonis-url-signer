@@ -4,7 +4,7 @@ const path = require('path')
 
 module.exports = async cli => {
   try {
-    const fromPath = path.join(__dirname, 'config/indes.js')
+    const fromPath = path.join(__dirname, 'config/index.js')
     const toPath = path.join(cli.helpers.configPath(), 'urlSigner.js')
     await cli.copy(fromPath, toPath)
     cli.command.completed('create', 'config/urlSigner.js')
