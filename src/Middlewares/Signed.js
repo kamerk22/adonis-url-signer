@@ -29,7 +29,7 @@ class Signed {
         request.originalUrl()
     )
     if (!isAllowed) {
-      var error = new Error('Forbridden: Access Denied.')
+      var error = new Error('Forbidden: Access Denied.')
       error.status = 403
       throw error
     }
