@@ -1,6 +1,6 @@
 {
   "name": "adonis-url-signer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "URL signing provider for Adonis.js",
   "main": "index.js",
   "scripts": {
