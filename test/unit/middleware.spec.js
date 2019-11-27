@@ -59,7 +59,7 @@ test.group('Signed Middleware', group => {
         return assert.isTrue(true)
       })
     } catch ({ message }) {
-      assert.equal(message, 'Forbridden: Access Denied.')
+      assert.equal(message, 'Forbidden: Access Denied.')
     }
   })
 
