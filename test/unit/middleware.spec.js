@@ -82,7 +82,7 @@ test.group('Signed Middleware', group => {
     try {
       await signed.handle(fakeRequest)
     } catch ({ message }) {
-      assert.equal(message, 'Forbridden: Access Denied.')
+      assert.equal(message, 'Forbidden: Access Denied.')
     }
   })
 })
